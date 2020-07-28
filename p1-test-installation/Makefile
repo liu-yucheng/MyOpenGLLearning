@@ -1,10 +1,21 @@
 EXE_DIR=./
 OBJ_DIR=./
 SRC_DIR=./
+
 LDLIBS=-lglut -lGLU -lGL
 
-$(EXE_DIR)main.x: $(OBJ_DIR)main.o
-	g++ -o $(EXE_DIR)main.x $(OBJ_DIR)main.o $(LDLIBS)
+ALL_EXE=$(EXE_DIR)*.x
+ALL_OBJ=$(OBJ_DIR)*.o
 
-$(OBJ_DIR)main.o: $(SRC_DIR)main.cpp
-	g++ -c $(SRC_DIR)main.cpp -o $(OBJ_DIR)main.o $(LDLIBS)
+MAIN_X=$(EXE_DIR)main.x
+MAIN_O=$(OBJ_DIR)main.o
+MAIN_CPP=$(SRC_DIR)main.cpp
+
+$(MAIN_X): $(MAIN_O)
+	g++ -o $(MAIN_X) $(MAIN_O) $(LDLIBS)
+
+$(MAIN_O): $(MAIN_CPP)
+	g++ -c $(MAIN_CPP) -o $(MAIN_O) $(LDLIBS)
+
+clean:
+	rm -f $(ALL_EXE) $(ALL_OBJ)
