@@ -1,90 +1,91 @@
+### (Edited)
 ### https://github.com/github/gitignore/blob/master/C%2B%2B.gitignore
 
 # Prerequisites
-*.d
+**/*.d
 
 # Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+**/*.slo
+**/*.lo
+**/*.o
+**/*.obj
 
 # Precompiled Headers
-*.gch
-*.pch
+**/*.gch
+**/*.pch
 
 # Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
+**/*.so
+**/*.dylib
+**/*.dll
 
 # Fortran module files
-*.mod
-*.smod
+**/*.mod
+**/*.smod
 
 # Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
+**/*.lai
+**/*.la
+**/*.a
+**/*.lib
 
 # Executables
-*.exe
-*.out
-*.app
+**/*.exe
+**/*.out
+**/*.app
 
+### (Edited)
 ### https://github.com/github/gitignore/blob/master/C.gitignore
 
 # Prerequisites
-*.d
+**/*.d
 
 # Object files
-*.o
-*.ko
-*.obj
-*.elf
+**/*.o
+**/*.ko
+**/*.obj
+**/*.elf
 
 # Linker output
-*.ilk
-*.map
-*.exp
+**/*.ilk
+**/*.map
+**/*.exp
 
 # Precompiled Headers
-*.gch
-*.pch
+**/*.gch
+**/*.pch
 
 # Libraries
-*.lib
-*.a
-*.la
-*.lo
+**/*.lib
+**/*.a
+**/*.la
+**/*.lo
 
 # Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
+**/*.dll
+**/*.so
+**/*.so.*
+**/*.dylib
 
 # Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
+**/*.exe
+**/*.out
+**/*.app
+**/*.i*86
+**/*.x86_64
+**/*.hex
 
 # Debug files
-*.dSYM/
-*.su
-*.idb
-*.pdb
+**/*.dSYM/
+**/*.su
+**/*.idb
+**/*.pdb
 
 # Kernel Module Compile Results
-*.mod*
-*.cmd
-.tmp_versions/
-modules.order
-Module.symvers
-Mkfile.old
-dkms.conf
-
+**/*.mod*
+**/*.cmd
+**/.tmp_versions/
+**/modules.order
+**/Module.symvers
+**/Mkfile.old
+**/dkms.conf
