@@ -1,4 +1,6 @@
-(Creative Commons) License:
+Copyright (c) 2020 Yucheng Liu
+
+Creative Commons License:
 CC BY-NC-SA 4.0
 
 Human Readable:
@@ -8,3 +10,4 @@ Legal Code:
 https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
 
 Note: Additional terms may apply.
+
