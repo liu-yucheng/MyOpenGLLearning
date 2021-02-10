@@ -1,4 +1,11 @@
-/* http://www.codebind.com/linux-tutorials/install-opengl-ubuntu-linux/ */
+/* File: main.cpp
+ *
+ * Reference:
+ * http://www.codebind.com/linux-tutorials/install-opengl-ubuntu-linux/
+ * 
+ * A C++ program that initializes the OpenGL environment and shows a "Hello
+ * world" window on the screen.
+ */
 
 #include <GL/glut.h>
 
