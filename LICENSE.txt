@@ -9,5 +9,7 @@ https://creativecommons.org/licenses/by-nc-sa/4.0/
 Legal Code:
 https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
 
-Note: Additional terms may apply.
-
+Note:
+Please check the reference in the source code for more information.
+Non-commercial use only.
+Additional terms may apply.
