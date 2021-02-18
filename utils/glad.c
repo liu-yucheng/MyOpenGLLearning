@@ -1,1 +1,0 @@
-/home/user/Libs/GLAD/src/glad.c
