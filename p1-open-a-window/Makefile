@@ -2,7 +2,7 @@ EXE_DIR=./
 OBJ_DIR=./
 SRC_DIR=./
 
-LDLIBS=-lglut -lGLU -lGL
+LDLIBS=-lGL -lGLU -lglut
 
 ALL_EXE=$(EXE_DIR)*.x
 ALL_OBJ=$(OBJ_DIR)*.o
