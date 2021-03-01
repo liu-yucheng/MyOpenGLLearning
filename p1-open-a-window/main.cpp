@@ -12,7 +12,7 @@
 #include <GL/gl.h>
 #include <GL/glut.h>
 
-void display();
+static void display();
 
 int main(int argc, char **argv) {
     glutInit(&argc, argv);
@@ -27,7 +27,7 @@ int main(int argc, char **argv) {
     return 0;
 }
 
-void display() {
+static void display() {
     glClear(GL_COLOR_BUFFER_BIT);
     glutSwapBuffers();
 }
