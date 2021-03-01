@@ -8,9 +8,7 @@
  * window on the screen.
  */
 
-#include <iostream>
-#include <GL/gl.h>
-#include <GL/glut.h>
+#include <GL/freeglut.h>
 
 static void display();
 
