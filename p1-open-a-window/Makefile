@@ -2,7 +2,7 @@ EXE_DIR=./
 OBJ_DIR=./
 SRC_DIR=./
 
-LDLIBS=-lGL -lGLU -lglut
+LDLIBS=-lGL -lglut
 
 ALL_EXE=$(EXE_DIR)*.x
 ALL_OBJ=$(OBJ_DIR)*.o
@@ -15,7 +15,7 @@ $(MAIN_X): $(MAIN_O)
 	g++ -o $(MAIN_X) $(MAIN_O) $(LDLIBS)
 
 $(MAIN_O): $(MAIN_CPP)
-	g++ -c $(MAIN_CPP) -o $(MAIN_O) $(LDLIBS)
+	g++ -c $(MAIN_CPP) -o $(MAIN_O)
 
 clean:
 	rm -f $(ALL_EXE) $(ALL_OBJ)
