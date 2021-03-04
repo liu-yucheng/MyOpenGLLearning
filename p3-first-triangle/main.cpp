@@ -95,10 +95,12 @@ static void initVertexBuffer() {
     // Make the vertex buffer an array buffer
     glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
     // Fill the buffer with the array of vertices
+    // clang-format off
     glBufferData(
         GL_ARRAY_BUFFER,
         verticesCount * sizeof(glm::vec3),
         vertices,
         GL_STATIC_DRAW
     );
+    // clang-format on
 }
