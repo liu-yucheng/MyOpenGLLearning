@@ -19,7 +19,7 @@
 static GLuint vertexBuffer;
 static void display();
 static void initGLEW();
-static void initVertexBuffer();
+static void loadVertexBuffer();
 
 int main(int argc, char **argv) {
     // Initialize GLUT
@@ -34,7 +34,7 @@ int main(int argc, char **argv) {
     // Set up the background of the window
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     // Prepare the objects to be drawn
-    initVertexBuffer();
+    loadVertexBuffer();
     // Draw the objects onto the window
     glutMainLoop();
 
@@ -80,9 +80,9 @@ static void initGLEW() {
 }
 
 /*
- * Initializes the vertex buffer.
+ * Loads the vertex buffer.
  */
-static void initVertexBuffer() {
+static void loadVertexBuffer() {
     // Create array of vertices
     int const verticesCount = 3;
     glm::vec3 vertices[verticesCount];
