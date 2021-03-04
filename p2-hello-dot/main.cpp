@@ -100,7 +100,7 @@ static void display() {
 }
 
 /*
- * Initializes GLEW
+ * Initializes GLEW.
  */
 static void initGLEW() {
     GLenum result = glewInit();
@@ -113,7 +113,7 @@ static void initGLEW() {
 }
 
 /*
- * Initializes the vertex buffer
+ * Initializes the vertex buffer.
  */
 static void initVertexBuffer() {
     // Create array of vertices
