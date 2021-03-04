@@ -41,7 +41,9 @@
  *      in the compilation command.
  * 
  * Note 4:
- * The Hello Dot's size is 1 by 1 pixel, which is very tiny. Please watch out.
+ * The Hello Dot's size on screen is 1 by 1 pixel.
+ * That means the dot is very tiny in actual size.
+ * Please watch out.
  */
 
 #include <iostream>
@@ -126,10 +128,12 @@ static void initVertexBuffer() {
     // Make the vertex buffer an array buffer
     glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
     // Fill the buffer with the array of vertices
+    // clang-format off
     glBufferData(
         GL_ARRAY_BUFFER,
         verticesCount * sizeof(glm::vec3),
         vertices,
         GL_STATIC_DRAW
     );
+    // clang-format on
 }
