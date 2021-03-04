@@ -16,8 +16,7 @@
 #include <GL/freeglut.h>
 #include <glm/glm.hpp>
 
-GLuint vertexBuffer;
-
+static GLuint vertexBuffer;
 static void display();
 static void initGLEW();
 static void initVertexBuffer();
