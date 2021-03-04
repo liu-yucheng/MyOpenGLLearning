@@ -118,8 +118,9 @@ static void initGLEW() {
  */
 static void initVertexBuffer() {
     // Create array of vertices
-    int verticesSize = 1;
-    glm::vec3 vertices[1];
+    int const verticesCount = 1;
+    glm::vec3 vertices[verticesCount];
+    // Fill the array with the info of the point
     vertices[0] = glm::vec3(0.0f, 0.0f, 0.0f);
     // Generate 1 vertex buffer
     glGenBuffers(1, &vertexBuffer);
@@ -128,7 +129,7 @@ static void initVertexBuffer() {
     // Fill the buffer with the array of vertices
     glBufferData(
         GL_ARRAY_BUFFER,
-        verticesSize * sizeof(glm::vec3),
+        verticesCount * sizeof(glm::vec3),
         vertices,
         GL_STATIC_DRAW
     );
