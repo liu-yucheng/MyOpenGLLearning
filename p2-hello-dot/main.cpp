@@ -1,6 +1,6 @@
 /* File name: main.cpp
  *
- * Reference:
+ * References:
  * 1.   ogldev.org/www/tutorial02/tutorial02.html
  * 2.   glm.g-truc.net/0.9.9/api/modules.html
  * 
