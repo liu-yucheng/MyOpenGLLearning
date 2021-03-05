@@ -28,8 +28,6 @@
 // Include C libraries
 #include <cstdio>
 #include <cstring>
-// Include C++ libraries
-#include <iostream>
 // Include GLEW before other GL libraries
 #include <GL/glew.h>
 // Include other GL libraries
