@@ -25,10 +25,14 @@
  * C++ raw string is a language feature that is supported in C++ 11 and above.
  */
 
-#include <iostream>
+// Include C libraries
+#include <cstdio>
 #include <cstring>
-#include <string>
+// Include C++ libraries
+#include <iostream>
+// Include GLEW before other GL libraries
 #include <GL/glew.h>
+// Include other GL libraries
 #include <GL/freeglut.h>
 #include <glm/glm.hpp>
 
@@ -65,6 +69,9 @@ static void initGLEW();
 static void loadVertexBuffer();
 static void loadShaderProgram();
 static void addShaderTextToProgram(GLuint, GLenum, char const *);
+static void errShowLine(char const *, char const *, ...);
+static void errShowProgramLog(char const *, GLuint);
+static void errShowShaderLog(char const *, GLuint);
 
 int main(int argc, char **argv) {
     // Initialize GLUT
@@ -117,11 +124,12 @@ static void display() {
  * Initializes GLEW.
  */
 static void initGLEW() {
+    char const funcName[] = "initGLEW";
+
     GLenum result = glewInit();
     if (result != GLEW_OK) {
-        std::cerr << "initGLEW: error occured in GLEW initialization\n";
-        std::cerr << "initGLEW: error string: " << glewGetErrorString(result)
-                  << std::endl;
+        errShowLine(funcName, "error occured when initializing GLEW");
+        errShowLine(funcName, "error string: %s", glewGetErrorString(result));
         exit(1);
     }
 }
@@ -155,10 +163,11 @@ static void loadVertexBuffer() {
 /* Prepares the shader program. */
 static void loadShaderProgram() {
     // Create a shader program
+    char const funcName[] = "loadShaderProgram";
+
     GLuint shaderProgram = glCreateProgram();
     if (shaderProgram == 0) {
-        std::cerr << "loadShaderProgram: "
-                  << "error occured when creating shader program" << std::endl;
+        errShowLine(funcName, "error occured when creating shader program");
         exit(1);
     }
 
@@ -176,18 +185,13 @@ static void loadShaderProgram() {
     );
     // clang-format on
 
-    int const infoLogLength = 1024;
     GLint result = 0;
-    GLchar infoLog[infoLogLength] = {'\0'};
-
     // Link the shader program
     glLinkProgram(shaderProgram);
     glGetProgramiv(shaderProgram, GL_LINK_STATUS, &result);
     if (result == 0) {
-        glGetProgramInfoLog(shaderProgram, infoLogLength, nullptr, infoLog);
-        std::cerr << "loadShaderProgram: "
-                  << "error occured when linking the shader program\n";
-        std::cerr << "loadShaderProgram: info log: " << infoLog << std::endl;
+        errShowLine(funcName, "error occured when linking shader program");
+        errShowProgramLog(funcName, shaderProgram);
         exit(1);
     }
 
@@ -195,10 +199,8 @@ static void loadShaderProgram() {
     glValidateProgram(shaderProgram);
     glGetProgramiv(shaderProgram, GL_VALIDATE_STATUS, &result);
     if (result == 0) {
-        glGetProgramInfoLog(shaderProgram, infoLogLength, nullptr, infoLog);
-        std::cerr << "loadShaderProgram: "
-                  << "error occured when validating the shader program\n";
-        std::cerr << "loadShaderProgram: info log: " << infoLog << std::endl;
+        errShowLine(funcName, "error occured when validating shader program");
+        errShowProgramLog(funcName, shaderProgram);
         exit(1);
     }
 
@@ -214,12 +216,12 @@ static void addShaderTextToProgram(
     char const *shaderText
 ) {
     // clang-format on
+    char const funcName[] = "addShaderTextToProgram";
+
     // Create a shader
     GLuint shader = glCreateShader(shaderType);
     if (shader == 0) {
-        std::cerr << "addShaderTextToProgram: "
-                  << "error occured when creating shader"
-                  << std::endl;
+        errShowLine(funcName, "error occured when creating shader");
         exit(1);
     }
 
@@ -236,18 +238,49 @@ static void addShaderTextToProgram(
     GLint compilationResult = 0;
     glGetShaderiv(shader, GL_COMPILE_STATUS, &compilationResult);
     if (compilationResult == 0) {
-        int const infoLogLength = 1024;
-        GLchar infoLog[infoLogLength] = {'\0'};
-        glGetShaderInfoLog(shader, infoLogLength, nullptr, infoLog);
-        std::cerr << "addShaderTextToProgram: "
-                  << "error occured when compiling shader\n";
-        std::cerr << "addShaderTextToProgram: "
-                  << "shader type: " << shaderType << "\n";
-        std::cerr << "addShaderTextToProgram: info log: " << infoLog
-                  << std::endl;
+        errShowLine(funcName, "error occured when compiling shader");
+        errShowLine(funcName, "shader type: %d", shaderType);
+        errShowShaderLog(funcName, shader);
         exit(1);
     }
 
     // Attach the shader to the shader program
     glAttachShader(shaderProgram, shader);
+}
+
+/*
+ * Show an error information line in stderr.
+ */
+static void errShowLine(char const *funcName, char const *format, ...) {
+    va_list args;
+    va_start(args, format);
+    // Print "<funcName>: "
+    fprintf(stderr, "%s: ", funcName);
+    // Print the error information line
+    vfprintf(stderr, format, args);
+    // Print a new line character
+    fprintf(stderr, "\n");
+    // Flush the stderr file onto the terminal
+    fflush(stderr);
+    va_end(args);
+}
+
+/*
+ * Get and show the GL shader program info log in stderr.
+ */
+static void errShowProgramLog(char const *funcName, GLuint program) {
+    int const logLength = 1023;
+    GLchar log[logLength + 1] = {0};
+    glGetProgramInfoLog(program, logLength, NULL, log);
+    errShowLine(funcName, "info log: %s", log);
+}
+
+/*
+ * Get and show the GL shader info log in stderr.
+ */
+static void errShowShaderLog(char const *funcName, GLuint shader) {
+    int const logLength = 1023;
+    GLchar log[logLength + 1] = {0};
+    glGetShaderInfoLog(shader, logLength, NULL, log);
+    errShowLine(funcName, "info log: %s", log);
 }
