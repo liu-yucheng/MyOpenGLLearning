@@ -11,11 +11,15 @@
  * This program is only slightly different from the one in part 2.
  */
 
-#include <iostream>
+// Include C libraries
+#include <cstdio>
+// Include GLEW before other GL libraries
 #include <GL/glew.h>
+// Include all other GL libraries
 #include <GL/freeglut.h>
 #include <glm/glm.hpp>
 
+static char const windowTitle[] = "First Triangle";
 static GLuint vertexBuffer;
 static void display();
 static void initGLEW();
@@ -27,7 +31,7 @@ int main(int argc, char **argv) {
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
     glutInitWindowSize(1024, 768);
     glutInitWindowPosition(100, 100);
-    glutCreateWindow("Open a Window");
+    glutCreateWindow(windowTitle);
     glutDisplayFunc(display);
     // Initialize GLEW
     initGLEW();
@@ -72,9 +76,15 @@ static void display() {
 static void initGLEW() {
     GLenum result = glewInit();
     if (result != GLEW_OK) {
-        std::cerr << "initGLEW: error occured in GLEW initialization\n"
-                  << "initGLEW: error string: " << glewGetErrorString(result)
-                  << std::endl;
+        fprintf(stderr, "initGLEW: error occured in GLEW initialization\n");
+        // clang-format off
+        fprintf(
+            stderr,
+            "initGLEW: error string: %s\n",
+            glewGetErrorString(result)
+        );
+        // clang-format on
+        fflush(stderr);
         exit(1);
     }
 }
