@@ -10,6 +10,7 @@
 
 #include <GL/freeglut.h>
 
+static char const windowTitle[] = "Open a Window";
 static void display();
 
 int main(int argc, char **argv) {
@@ -17,7 +18,7 @@ int main(int argc, char **argv) {
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
     glutInitWindowSize(1024, 768);
     glutInitWindowPosition(100, 100);
-    glutCreateWindow("Open a Window");
+    glutCreateWindow(windowTitle);
     glutDisplayFunc(display);
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     glutMainLoop();
