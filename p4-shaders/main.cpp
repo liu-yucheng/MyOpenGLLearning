@@ -34,6 +34,7 @@
 #include <GL/freeglut.h>
 #include <glm/glm.hpp>
 
+static char const windowTitle[] = "Shaders";
 static GLuint vertexBuffer;
 static char const vertexShaderText[] = R"(
 #version 140
@@ -77,7 +78,7 @@ int main(int argc, char **argv) {
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
     glutInitWindowSize(1024, 768);
     glutInitWindowPosition(100, 100);
-    glutCreateWindow("Open a Window");
+    glutCreateWindow(windowTitle);
     glutDisplayFunc(display);
     // Initialize GLEW
     initGLEW();
