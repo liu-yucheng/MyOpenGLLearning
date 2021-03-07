@@ -50,7 +50,7 @@
 #include <cstdio>
 // Include GLEW before other GL libraries
 #include <GL/glew.h>
-// Include all other GL libraries
+// Include other GL libraries
 #include <GL/freeglut.h>
 #include <glm/glm.hpp>
 
