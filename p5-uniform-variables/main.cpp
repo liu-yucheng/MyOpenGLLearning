@@ -95,15 +95,20 @@ int main(int argc, char **argv) {
  */
 static void display() {
     /*
-     * Arc-sine value of uniform variable "scale" in the vertex shader text.
+     * Speed of the rendered object's scale change.
      */
-    static float scaleArcsinVal = 0.0f;
-    scaleArcsinVal += 0.001f;
+    static float const scaleChangeSpeed = 0.001f;
+    /*
+     * Count of the rendered object's scale changes.
+     */
+    static int scaleChangeCount = 0;
+
+    scaleChangeCount += 1;
 
     glClear(GL_COLOR_BUFFER_BIT);
 
     // Update the "scale" varible in the shader program
-    glUniform1f(scale, sinf(scaleArcsinVal));
+    glUniform1f(scale, sinf(scaleChangeSpeed * scaleChangeCount));
 
     glEnableVertexAttribArray(0);
     // Bind the buffer that has the contents to be drawn
