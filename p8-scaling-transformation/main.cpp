@@ -26,9 +26,7 @@
 
 static char const windowTitle[] = "Scaling Transformation";
 static GLuint vertexBuffer;
-/* 
- * Reference of the uniform variable "world" in shader program.
- */
+/* Reference of the uniform variable "world" in shader program. */
 static GLuint world;
 static char const vertexShaderText[] = R"(
 #version 140
@@ -74,33 +72,25 @@ int main(int argc, char **argv) {
     loadGLUTFuncs();
     // Initialize GLEW
     initGLEW();
-    // Set up the background of the window
+    // Set up the background
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     // Prepare the objects to be drawn
     loadVertexBuffer();
     // Prepare the shaders
     loadShaderProgram();
-    // Draw the objects onto the window
+    // Draw the objects
     glutMainLoop();
 
     return 0;
 }
 
-/*
- * Displays contents in the window.
- */
+/* Displays the objects to be rendered. */
 static void display() {
-    /*
-     * Speed of the rendered object's scale change.
-     */
+    /* Speed of the rendered object's scale change. */
     static float const scaleChangeSpeed = 0.001f;
-    /*
-     * Count of the rendered object's scale changes.
-     */
+    /* Count of the rendered object's scale changes. */
     static int scaleChangeCount = 0;
-    /*
-     * Value of uniform variable "world" in shader program.
-     */
+    /* Value of uniform variable "world" in shader program. */
     static glm::mat4 worldVal(1.0f);
 
     scaleChangeCount += 1;
@@ -118,43 +108,26 @@ static void display() {
     glClear(GL_COLOR_BUFFER_BIT);
 
     // Update the "world" varible in the shader program
-    // uniform variable location:   given below
-    // number of matrices:          1
-    // row-major:                   false (col-major)
-    // memory location:             given below
     glUniformMatrix4fv(world, 1, GL_FALSE, glm::value_ptr(worldVal));
 
     glEnableVertexAttribArray(0);
     // Bind the buffer that has the contents to be drawn
     glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
     // Specify the data structure of a vertex to OpenGL
-    // attribute index:                 0 (default)
-    // attribute element count:         3
-    // attribute data type:             float
-    // make attribute normalized:       false
-    // size of vertex data structure:   0 (default)
-    // attribute position in vertex:    0
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
     // Draw the verteices
-    // draw as:             triangles
-    // draw from index:     0
-    // count to be drawn:   3
     glDrawArrays(GL_TRIANGLES, 0, 3);
     glDisableVertexAttribArray(0);
     glutSwapBuffers();
 }
 
-/*
- * Registers the GLUT function callbacks.
- */
+/* Registers the GLUT function callbacks. */
 static void loadGLUTFuncs() {
     glutDisplayFunc(display);
     glutIdleFunc(display);
 }
 
-/*
- * Initializes GLEW.
- */
+/* Initializes GLEW. */
 static void initGLEW() {
     char const funcName[] = "initGLEW";
 
@@ -166,9 +139,7 @@ static void initGLEW() {
     }
 }
 
-/*
- * Initializes the vertex buffer.
- */
+/* Initializes the vertex buffer. */
 static void loadVertexBuffer() {
     // Create array of vertices
     int const verticesCount = 3;
@@ -287,9 +258,7 @@ static void addShaderTextToProgram(
     glAttachShader(shaderProgram, shader);
 }
 
-/*
- * Show an error information line in stderr.
- */
+/* Shows an error information line in stderr. */
 static void errShowLine(char const *funcName, char const *format, ...) {
     va_list args;
     va_start(args, format);
@@ -304,9 +273,7 @@ static void errShowLine(char const *funcName, char const *format, ...) {
     va_end(args);
 }
 
-/*
- * Get and show the GL shader program info log in stderr.
- */
+/* Gets and shows the GL shader program info log in stderr. */
 static void errShowProgramLog(char const *funcName, GLuint program) {
     int const logLength = 1023;
     GLchar log[logLength + 1] = {0};
@@ -314,9 +281,7 @@ static void errShowProgramLog(char const *funcName, GLuint program) {
     errShowLine(funcName, "info log: %s", log);
 }
 
-/*
- * Get and show the GL shader info log in stderr.
- */
+/* Gets and shows the GL shader info log in stderr. */
 static void errShowShaderLog(char const *funcName, GLuint shader) {
     int const logLength = 1023;
     GLchar log[logLength + 1] = {0};
