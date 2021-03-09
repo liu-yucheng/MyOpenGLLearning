@@ -45,7 +45,7 @@ int main(int argc, char **argv) {
     return 0;
 }
 
-/* Displays objects to be rendered. */
+/* Displays the objects to be rendered. */
 static void display() {
     glClear(GL_COLOR_BUFFER_BIT);
     glEnableVertexAttribArray(0);
