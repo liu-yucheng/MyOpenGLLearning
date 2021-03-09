@@ -97,7 +97,7 @@ static void display() {
 
     scaleChangeCount += 1;
     // Update the values of uniform variable "world"
-    // Make the object shrinks and stretches
+    // Make the object rotate around Y axis
     {
         // Do the linear algebra
         float const a = scaleChangeSpeed * scaleChangeCount;
