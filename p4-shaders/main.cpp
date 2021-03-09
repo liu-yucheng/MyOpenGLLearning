@@ -82,46 +82,33 @@ int main(int argc, char **argv) {
     glutDisplayFunc(display);
     // Initialize GLEW
     initGLEW();
-    // Set up the background of the window
+    // Set up the background
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     // Prepare the objects to be drawn
     loadVertexBuffer();
     // Prepare the shaders
     loadShaderProgram();
-    // Draw the objects onto the window
+    // Draw the objects
     glutMainLoop();
 
     return 0;
 }
 
-/*
- * Displays contents in the window.
- */
+/* Displays the objects to be rendered. */
 static void display() {
     glClear(GL_COLOR_BUFFER_BIT);
     glEnableVertexAttribArray(0);
     // Bind the buffer that has the contents to be drawn
     glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
     // Specify the data structure of a vertex to OpenGL
-    // attribute index:                 0 (default)
-    // attribute element count:         3
-    // attribute data type:             float
-    // make attribute normalized:       false
-    // size of vertex data structure:   0 (default)
-    // attribute position in vertex:    0
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
     // Draw the verteices
-    // draw as:             triangles
-    // draw from index:     0
-    // count to be drawn:   3
     glDrawArrays(GL_TRIANGLES, 0, 3);
     glDisableVertexAttribArray(0);
     glutSwapBuffers();
 }
 
-/*
- * Initializes GLEW.
- */
+/* Initializes GLEW. */
 static void initGLEW() {
     char const funcName[] = "initGLEW";
 
@@ -133,9 +120,7 @@ static void initGLEW() {
     }
 }
 
-/*
- * Initializes the vertex buffer.
- */
+/* Initializes the vertex buffer. */
 static void loadVertexBuffer() {
     // Create array of vertices
     int const verticesCount = 3;
@@ -247,9 +232,7 @@ static void addShaderTextToProgram(
     glAttachShader(shaderProgram, shader);
 }
 
-/*
- * Show an error information line in stderr.
- */
+/* Shows an error information line in stderr. */
 static void errShowLine(char const *funcName, char const *format, ...) {
     va_list args;
     va_start(args, format);
@@ -264,9 +247,7 @@ static void errShowLine(char const *funcName, char const *format, ...) {
     va_end(args);
 }
 
-/*
- * Get and show the GL shader program info log in stderr.
- */
+/* Gets and shows the GL shader program info log in stderr. */
 static void errShowProgramLog(char const *funcName, GLuint program) {
     int const logLength = 1023;
     GLchar log[logLength + 1] = {0};
@@ -274,9 +255,7 @@ static void errShowProgramLog(char const *funcName, GLuint program) {
     errShowLine(funcName, "info log: %s", log);
 }
 
-/*
- * Get and show the GL shader info log in stderr.
- */
+/* Get and show the GL shader info log in stderr. */
 static void errShowShaderLog(char const *funcName, GLuint shader) {
     int const logLength = 1023;
     GLchar log[logLength + 1] = {0};
