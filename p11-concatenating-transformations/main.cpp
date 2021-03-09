@@ -23,7 +23,7 @@
 #include <glm/glm.hpp>
 #include <glm/ext.hpp>
 
-static char const windowTitle[] = "Indexed Draws";
+static char const windowTitle[] = "Concatenating Transformations";
 static GLuint vertexBuffer;
 static GLuint indexBuffer;
 /* Reference of the uniform variable "world" in shader program. */
