@@ -19,7 +19,7 @@
 #include <cmath>
 // Include GLEW before other GL libraries
 #include <GL/glew.h>
-// Include other GL related libraries
+// Include other GL libraries
 #include <GL/freeglut.h>
 #include <glm/glm.hpp>
 #include <glm/ext.hpp>
