@@ -18,7 +18,7 @@
 // Include other GL libraries
 #include <GL/freeglut.h>
 #include <glm/glm.hpp>
-#include <glm/gtc/type_ptr.hpp>
+#include <glm/ext.hpp>
 
 static char const windowTitle[] = "Translation Transformation";
 static GLuint vertexBuffer;
