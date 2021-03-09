@@ -107,8 +107,8 @@ static void display() {
         float const a = rotateSpeedClockwise * rotateCount;
         glm::mat4 *m = &worldVal;
         // clang-format off
-        (*m)[0][0] = cosf(a); (*m)[0][1] = -sinf(a);
-        (*m)[1][0] = sinf(a); (*m)[1][1] = cosf(a);
+        (*m)[0][0] = cosf(a);   (*m)[0][1] = -sinf(a);
+        (*m)[1][0] = sinf(a);   (*m)[1][1] = cosf(a);
         // clang-format on
     }
 
