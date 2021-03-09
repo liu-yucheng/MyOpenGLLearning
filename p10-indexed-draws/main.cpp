@@ -88,19 +88,19 @@ int main(int argc, char **argv) {
 
 /* Displays the objects to be rendered. */
 static void display() {
-    /* Speed of the rendered object's scale change. */
-    static float const scaleChangeSpeed = 0.001f;
-    /* Count of the rendered object's scale changes. */
-    static int scaleChangeCount = 0;
+    /* Speed of the rendered object's rotation. */
+    static float const rotateSpeed = 0.001f;
+    /* Count of the rendered object's rotation. */
+    static int rotateCount = 0;
     /* Value of uniform variable "world" in shader program. */
     static glm::mat4 worldVal(1.0f);
 
-    scaleChangeCount += 1;
+    rotateCount += 1;
     // Update the values of uniform variable "world"
     // Make the object rotate around Y axis
     {
         // Do the linear algebra
-        float const a = scaleChangeSpeed * scaleChangeCount;
+        float const a = rotateSpeed * rotateCount;
         glm::mat4 *m = &worldVal;
         (*m)[0][0] = cosf(a);
         (*m)[0][2] = -sinf(a);
