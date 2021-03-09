@@ -86,7 +86,7 @@ int main(int argc, char **argv) {
     return 0;
 }
 
-/* Displays contents to be rendered. */
+/* Displays the objects to be rendered. */
 static void display() {
     /* Speed of the rendered object's scale change. */
     static float const scaleChangeSpeed = 0.001f;
