@@ -80,9 +80,7 @@ int main(int argc, char **argv) {
     return 0;
 }
 
-/*
- * Displays contents in the window.
- */
+/* Displays objects to be rendered. */
 static void display() {
     glClear(GL_COLOR_BUFFER_BIT);
     glEnableVertexAttribArray(0);
@@ -105,9 +103,7 @@ static void display() {
     glutSwapBuffers();
 }
 
-/*
- * Initializes GLEW.
- */
+/* Initializes GLEW. */
 static void initGLEW() {
     GLenum result = glewInit();
     if (result != GLEW_OK) {
@@ -124,9 +120,7 @@ static void initGLEW() {
     }
 }
 
-/*
- * Initializes the vertex buffer.
- */
+/* Initializes the vertex buffer. */
 static void loadVertexBuffer() {
     // Create array of vertices
     int const verticesCount = 1;
