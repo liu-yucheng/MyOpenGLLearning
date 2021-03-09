@@ -97,6 +97,10 @@ static void display() {
     glClear(GL_COLOR_BUFFER_BIT);
 
     // Update the "world" varible in the shader program
+    // uniform variable location:   given below
+    // number of matrices:          1
+    // row-major:                   false (col-major)
+    // memory location:             given below
     glUniformMatrix4fv(world, 1, GL_FALSE, glm::value_ptr(worldVal));
 
     glEnableVertexAttribArray(0);
