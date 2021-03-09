@@ -255,7 +255,7 @@ static void errShowProgramLog(char const *funcName, GLuint program) {
     errShowLine(funcName, "info log: %s", log);
 }
 
-/* Get and show the GL shader info log in stderr. */
+/* Gets and shows the GL shader info log in stderr. */
 static void errShowShaderLog(char const *funcName, GLuint shader) {
     int const logLength = 1023;
     GLchar log[logLength + 1] = {0};
