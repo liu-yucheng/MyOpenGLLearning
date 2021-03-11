@@ -5,7 +5,8 @@
  * 2.   glm.g-truc.net/0.9.9/api/modules.html
  * 
  * Intro:
- * TODO
+ * A C++ (with OpenGL) program that shows a tetrahedron with various colors 
+ * (red, green, blue, black) rotating around the Y axis.
  */
 
 // Include C libraries
@@ -70,7 +71,7 @@ int main(int argc, char **argv) {
     // Initialize GLUT
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
-    glutInitWindowSize(1024, 768);
+    glutInitWindowSize(windowWidth, windowHeight);
     glutInitWindowPosition(100, 100);
     glutCreateWindow(windowTitle);
     // Register GLUT function callbacks
