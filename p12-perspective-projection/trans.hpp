@@ -50,7 +50,10 @@ class Trans {
      * Returns the world matrix. */
     glm::mat4 world();
     /* Finds the specified perspective projection of the object.
-     * Returns the perspective projection matrix. */
+     * Returns the perspective projection matrix.
+     * Note:
+     * The perspective projection matrix has a view that looks forward at +Z
+     * and upward at +Y directions. */
     glm::mat4 persp(Persp persp);
 };
 

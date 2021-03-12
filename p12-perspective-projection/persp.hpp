@@ -50,10 +50,9 @@ class Persp {
     float fov(float fov);
     /* Finds the perspective projection matrix.
      * Returns the perspective projection matrix.
-     * 
      * Note: 
      * The projection matrix has a view that looks forward at +Z direction and
-     * looks up at +Y direction. */
+     * looks upward at +Y direction. */
     glm::mat4 proj();
 };
 

@@ -59,8 +59,8 @@ glm::mat4 Persp::proj() {
     glm::mat4 projMat = glm::perspective(
         glm::radians(_fov), _aspect, _near, _far
     );
-    // Create a view matrix that looks forward at +Z direction and looks up at
-    // +Y direction
+    // Create a view matrix that looks forward at +Z direction and looks upward
+    // at +Y direction
     glm::mat4 viewMat = glm::lookAt(
         glm::vec3(0.0f, 0.0f, 0.0f),
         glm::vec3(0.0f, 0.0f, 1.0f),
