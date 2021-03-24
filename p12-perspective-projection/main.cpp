@@ -7,14 +7,16 @@
 #include "main.hpp"
 
 int main(int argc, char **argv) {
+    // Initialize GLUT
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
-    glutInitWindowSize(windowWidth, windowHeight);
+    glutInitWindowSize(winWidth, winHeight);
     glutInitWindowPosition(100, 100);
-    glutCreateWindow(windowTitle);
+    glutCreateWindow(winTitle);
 
     loadGLUTFuncs();
 
+    // Initialize GLEW after GLUT
     initGLEW();
 
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
@@ -23,16 +25,22 @@ int main(int argc, char **argv) {
     loadIndexBuffer();
     loadShaderProgram();
 
+    // Draw
     glutMainLoop();
 
     return 0;
+}
+
+static void loadGLUTFuncs() {
+    glutDisplayFunc(display);
+    glutIdleFunc(display);
 }
 
 static void display() {
     static float const rotateSpeed = 0.1f;
     static int transCount = 0;
     static Trans trans;
-    static Persp persp(windowWidth, windowHeight, 1.0f, 100.0f, 30.0f);
+    static Persp persp(winWidth, winHeight, 1.0f, 100.0f, 30.0f);
     static glm::mat4 worldVal(1.0f);
 
     transCount += 1;
@@ -45,6 +53,7 @@ static void display() {
 
     glUniformMatrix4fv(world, 1, GL_FALSE, glm::value_ptr(worldVal));
 
+    // Draw based on the vertices and indices
     glEnableVertexAttribArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
@@ -53,11 +62,6 @@ static void display() {
     glDisableVertexAttribArray(0);
 
     glutSwapBuffers();
-}
-
-static void loadGLUTFuncs() {
-    glutDisplayFunc(display);
-    glutIdleFunc(display);
 }
 
 static void initGLEW() {
@@ -72,8 +76,8 @@ static void initGLEW() {
 }
 
 static void loadVertexBuffer() {
-    int const verticesCount = 4;
-    glm::vec3 vertices[verticesCount];
+    int const vertexCount = 4;
+    glm::vec3 vertices[vertexCount];
     {
         glm::vec3 *v = vertices;
         v[0] = glm::vec3(-1.0f, -1.0f, 0.5773f);
@@ -82,12 +86,13 @@ static void loadVertexBuffer() {
         v[3] = glm::vec3(0.0f, 1.0f, 0.0f);
     }
 
+    // Put vertices into buffer
     glGenBuffers(1, &vertexBuffer);
     glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
     // clang-format off
     glBufferData(
         GL_ARRAY_BUFFER,
-        verticesCount * sizeof(glm::vec3),
+        vertexCount * sizeof(glm::vec3),
         vertices,
         GL_STATIC_DRAW
     );
@@ -95,9 +100,9 @@ static void loadVertexBuffer() {
 }
 
 static void loadIndexBuffer() {
-    int const indicesCount = 12;
+    int const indexCount = 12;
     // clang-format off
-    unsigned int indices[indicesCount] = {
+    unsigned int indices[indexCount] = {
         0, 3, 1,
         1, 3, 2,
         2, 3, 0,
@@ -105,12 +110,13 @@ static void loadIndexBuffer() {
     };
     // clang-format on
 
+    // Put indices into buffer
     glGenBuffers(1, &indexBuffer);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
     // clang-format off
     glBufferData(
         GL_ELEMENT_ARRAY_BUFFER,
-        indicesCount * sizeof(int),
+        indexCount * sizeof(int),
         indices,
         GL_STATIC_DRAW
     );
@@ -120,47 +126,39 @@ static void loadIndexBuffer() {
 static void loadShaderProgram() {
     char const funcName[] = "loadShaderProgram";
 
-    GLuint shaderProgram = glCreateProgram();
-    if (shaderProgram == 0) {
+    GLuint program = glCreateProgram();
+    if (program == 0) {
         errShowLine(funcName, "error: creating shader program");
         exit(1);
     }
 
+    // Load shader texts
     readShaderFile(vsFileName, vsText);
     readShaderFile(fsFileName, fsText);
-    // clang-format off
-    addShaderTextToProgram(
-        shaderProgram,
-        GL_VERTEX_SHADER,
-        vsText.c_str()
-    );
-    addShaderTextToProgram(
-        shaderProgram,
-        GL_FRAGMENT_SHADER,
-        fsText.c_str()
-    );
-    // clang-format on
+    addShaderTextToProgram(program, GL_VERTEX_SHADER, vsText.c_str());
+    addShaderTextToProgram(program, GL_FRAGMENT_SHADER, fsText.c_str());
 
+    // Link and validate
     GLint result = 0;
-    glLinkProgram(shaderProgram);
-    glGetProgramiv(shaderProgram, GL_LINK_STATUS, &result);
+    glLinkProgram(program);
+    glGetProgramiv(program, GL_LINK_STATUS, &result);
     if (result == 0) {
         errShowLine(funcName, "error: linking shader program");
-        errShowProgramLog(funcName, shaderProgram);
+        errShowProgramLog(funcName, program);
         exit(1);
     }
-
-    glValidateProgram(shaderProgram);
-    glGetProgramiv(shaderProgram, GL_VALIDATE_STATUS, &result);
+    glValidateProgram(program);
+    glGetProgramiv(program, GL_VALIDATE_STATUS, &result);
     if (result == 0) {
         errShowLine(funcName, "error: validating shader program");
-        errShowProgramLog(funcName, shaderProgram);
+        errShowProgramLog(funcName, program);
         exit(1);
     }
 
-    glUseProgram(shaderProgram);
+    glUseProgram(program);
 
-    world = glGetUniformLocation(shaderProgram, "world");
+    // Bind shader variable "world"
+    world = glGetUniformLocation(program, "world");
     if (world == 0xFFFFFFFF) {
         errShowLine(funcName, "error: binding shader variable \"world\"");
         exit(1);
@@ -187,37 +185,37 @@ static void readShaderFile(char const *name, std::string &content) {
 
 // clang-format off
 static void addShaderTextToProgram(
-    GLuint shaderProgram,
-    GLenum shaderType,
-    char const *shaderText
+    GLuint program, GLenum type, char const *text
 ) {
     // clang-format on
     char const funcName[] = "addShaderTextToProgram";
 
-    GLuint shader = glCreateShader(shaderType);
+    GLuint shader = glCreateShader(type);
     if (shader == 0) {
         errShowLine(funcName, "error: creating shader");
         exit(1);
     }
 
-    int const shaderTextsCount = 1;
-    GLchar const *glShaderTexts[shaderTextsCount];
-    glShaderTexts[0] = shaderText;
-    GLint shaderTextLengths[shaderTextsCount];
-    shaderTextLengths[0] = strlen(shaderText);
-    glShaderSource(shader, shaderTextsCount, glShaderTexts, shaderTextLengths);
+    // Bind shader text
+    int const textCount = 1;
+    GLchar const *glTexts[textCount];
+    glTexts[0] = text;
+    GLint textLengths[textCount];
+    textLengths[0] = strlen(text);
+    glShaderSource(shader, textCount, glTexts, textLengths);
 
+    // Compile
     glCompileShader(shader);
     GLint compilationResult = 0;
     glGetShaderiv(shader, GL_COMPILE_STATUS, &compilationResult);
     if (compilationResult == 0) {
         errShowLine(funcName, "error: compiling shader");
-        errShowLine(funcName, "shader type: %d", shaderType);
+        errShowLine(funcName, "shader type: %d", type);
         errShowShaderLog(funcName, shader);
         exit(1);
     }
 
-    glAttachShader(shaderProgram, shader);
+    glAttachShader(program, shader);
 }
 
 static void errShowLine(char const *funcName, char const *format, ...) {

@@ -28,9 +28,9 @@
 #include "persp.hpp"
 
 // Define variables
-static char const windowTitle[] = "Perspective Projection";
-static int const windowWidth = 1024;
-static int const windowHeight = 768;
+static char const winTitle[] = "Perspective Projection";
+static int const winWidth = 1024;
+static int const winHeight = 768;
 static GLuint vertexBuffer;
 static GLuint indexBuffer;
 static char const vsFileName[] = "./shader.vs";
@@ -40,10 +40,10 @@ static std::string fsText;
 static GLuint world;
 
 // Define functions
-/* Displays the objects to be rendered. */
-static void display();
 /* Loads the GLUT function callbacks. */
 static void loadGLUTFuncs();
+/* Displays the objects to be rendered. */
+static void display();
 /* Initializes GLEW. */
 static void initGLEW();
 /* Loads the vertex buffer. */
