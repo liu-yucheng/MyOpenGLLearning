@@ -5,7 +5,6 @@
  * 
  * Dependencies:
  * 1. GLM library (libglm-dev)
- * 2. Perspective library (persp.hpp)
  */
 
 #ifndef TRANS_HPP
@@ -14,48 +13,34 @@
 #include <glm/glm.hpp>
 #include <glm/ext.hpp>
 
-#include "persp.hpp"
-
-/* Transformation of a 3 dimensional object. */
+/* Transformation. */
 class Trans {
    private:
-    /* Scale of the object. */
+    /* Scale. */
     glm::vec3 _scale;
-    /* Rotation of the object (unit: degrees). */
+    /* Rotation (unit: degrees). */
     glm::vec3 _rot;
-    /* Position of the object. */
+    /* Position. */
     glm::vec3 _pos;
 
    public:
-    /* Initializes a Trans object.
-     * Initializes the object's scale to 1, rotation to 0 degrees, and position
-     * to 0. */
+    /* Initializes the object to scale 1, rotation 0 degrees, and position 0.*/
     Trans();
-    /* Returns the scale of the object. */
+    /* Reads the scale. */
     glm::vec3 scale();
-    /* Scales the object.
-     * Returns the old scale. */
+    /* Reads and updates the scale. */
     glm::vec3 scale(float x, float y, float z);
-    /* Returns the rotation of the object (unit: degrees). */
+    /* Reads the rotation (unit: degrees). */
     glm::vec3 rot();
-    /* Rotates the object (unit: degrees).
-     * Returns the old rotation. */
+    /* Reads and updates the rotation (unit: degrees). */
     glm::vec3 rot(float x, float y, float z);
-    /* Returns the position of the object. */
+    /* Reads the position. */
     glm::vec3 pos();
-    /* Positions the object.
-     * Returns the old position. */
+    /* Reads and updates the position. */
     glm::vec3 pos(float x, float y, float z);
-    /* Finds the world matrix of the object.
-     * Returns the world matrix. */
+    /* Finds the world matrix. */
     glm::mat4 world();
-    /* Finds the specified perspective projection of the object.
-     * Returns the perspective projection matrix.
-     * Note:
-     * The perspective projection matrix has a view that looks forward at +Z
-     * and upward at +Y directions. */
-    glm::mat4 persp(Persp persp);
 };
 
-/* trans.hpp */
+/* TRANS_HPP */
 #endif

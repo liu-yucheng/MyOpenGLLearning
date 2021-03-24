@@ -71,3 +71,9 @@ glm::mat4 Persp::proj() {
     // Apply the view on the perspective
     return projMat * viewMat;
 }
+
+glm::mat4 Persp::of(Trans &trans) {
+    glm::mat4 result;
+    result = this->proj() * trans.world();
+    return result;
+}

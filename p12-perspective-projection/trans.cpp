@@ -67,8 +67,3 @@ glm::mat4 Trans::world() {
     glm::mat4 world = posMat * rotMat * scaleMat;
     return world;
 }
-
-glm::mat4 Trans::persp(Persp persp) {
-    // Apply the projection on the world
-    return persp.proj() * world();
-}
