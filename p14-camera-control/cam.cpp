@@ -106,33 +106,21 @@ bool Cam::onKey(int key) {
 void Cam::onKeyUp() {
     glm::vec3 unitAim = glm::normalize(_aim);
     _pos += unitAim * _step;
-
-    printf("[%.2f %.2f %.2f]\n", _pos[0], _pos[1], _pos[2]);
-    fflush(stdout);
 }
 
 void Cam::onKeyDown() {
     glm::vec3 unitAim = glm::normalize(_aim);
     _pos -= unitAim * _step;
-
-    printf("[%.2f %.2f %.2f]\n", _pos[0], _pos[1], _pos[2]);
-    fflush(stdout);
 }
 
 void Cam::onKeyLeft() {
     glm::vec3 left = glm::cross(_aim, _up);
     glm::vec3 unitLeft = glm::normalize(left);
     _pos += unitLeft * _step;
-
-    printf("[%.2f %.2f %.2f]\n", _pos[0], _pos[1], _pos[2]);
-    fflush(stdout);
 }
 
 void Cam::onKeyRight() {
     glm::vec3 right = glm::cross(_up, _aim);
     glm::vec3 unitRight = glm::normalize(right);
     _pos += unitRight * _step;
-
-    printf("[%.2f %.2f %.2f]\n", _pos[0], _pos[1], _pos[2]);
-    fflush(stdout);
 }

@@ -3,10 +3,11 @@
  * Intro:
  * C++ header of a program that shows a tetrahedron with various colors (red,
  * green, blue, black) rotating around the Y axis. The tetrahedron is shown
- * using camera space.
+ * using camera space. One can move the camera with the four arrow keys on the
+ * keyboard.
  * 
  * References:
- * 1. ogldev.org/www/tutorial13/tutorial13.html
+ * 1. ogldev.org/www/tutorial14/tutorial14.html
  * 2. glm.g-truc.net/0.9.9/api/modules.html
  */
 
@@ -30,7 +31,7 @@
 #include "cam.hpp"
 
 // Define variables
-static char const winTitle[] = "Camera Space";
+static char const winTitle[] = "Camera Control";
 static int const winWidth = 1024;
 static int const winHeight = 768;
 static Cam cam;

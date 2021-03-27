@@ -18,8 +18,6 @@
 
 #include "trans.hpp"
 
-#include <cstdio>
-
 class Cam {
    private:
     /* Position. */
