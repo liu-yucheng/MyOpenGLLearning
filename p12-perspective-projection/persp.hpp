@@ -5,7 +5,6 @@
  * 
  * Dependencies:
  * 1. GLM library (libglm-dev)
- * 2. The transformation custom library.
  */
 
 #ifndef PERSP_HPP
@@ -13,8 +12,6 @@
 
 #include <glm/glm.hpp>
 #include <glm/ext.hpp>
-// Include custom libraries
-#include "trans.hpp"
 
 /* Perspective. */
 class Persp {
@@ -52,8 +49,6 @@ class Persp {
      * The projection matrix has a view that looks forward at +Z direction and
      * looks upward at +Y direction. */
     glm::mat4 proj();
-    /* Finds the matrix of this perspective of a specified transformation. */
-    glm::mat4 of(Trans &trans);
 };
 
 // PERSP_HPP

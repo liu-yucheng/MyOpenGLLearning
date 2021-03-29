@@ -26,6 +26,7 @@
 // Include custom libraries
 #include "trans.hpp"
 #include "persp.hpp"
+#include "pipeline.hpp"
 
 // Define variables
 static char const winTitle[] = "Perspective Projection";
@@ -37,7 +38,7 @@ static char const vsFileName[] = "./shader.vs";
 static std::string vsText;
 static char const fsFileName[] = "./shader.fs";
 static std::string fsText;
-static GLuint world;
+static GLuint mapping;
 
 // Define functions
 /* Loads the GLUT function callbacks. */
