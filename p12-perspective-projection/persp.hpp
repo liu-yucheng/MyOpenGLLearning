@@ -44,11 +44,11 @@ class Persp {
     float fov();
     /* Reads and updates the field of view (unit: degrees). */
     float fov(float fov);
-    /* Finds the perspective projection matrix.
+    /* Finds the perspective projection view matrix.
      * Note: 
      * The projection matrix has a view that looks forward at +Z direction and
      * looks upward at +Y direction. */
-    glm::mat4 proj();
+    glm::mat4 projView();
 };
 
 // PERSP_HPP

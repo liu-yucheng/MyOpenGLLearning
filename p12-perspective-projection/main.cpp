@@ -51,10 +51,7 @@ static void display() {
 
     // clang-format off
     glUniformMatrix4fv(
-        mapping,
-        1,
-        GL_FALSE,
-        glm::value_ptr(pipeline.mapping())
+        mapping, 1, GL_FALSE, glm::value_ptr(pipeline.mapping())
     );
     // clang-format on
 

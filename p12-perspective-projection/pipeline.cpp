@@ -22,7 +22,7 @@ glm::mat4 Pipeline::mapping() {
         result = _trans->world() * result;
     }
     if (_persp != nullptr) {
-        result = _persp->proj() * result;
+        result = _persp->projView() * result;
     }
 
     return result;

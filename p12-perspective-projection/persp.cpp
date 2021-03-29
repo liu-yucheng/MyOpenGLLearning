@@ -53,7 +53,7 @@ float Persp::fov(float fov) {
     return old;
 }
 
-glm::mat4 Persp::proj() {
+glm::mat4 Persp::projView() {
     // clang-format off
     // Create a perspective projection matrix (looks at +Y direction)
     glm::mat4 projMat = glm::perspective(
