@@ -49,6 +49,10 @@ glm::vec3 Cam::up(float x, float y, float z) {
 }
 
 glm::mat4 Cam::view() {
-    glm::mat4 viewMat = glm::lookAt(_pos, _aim, _up);
+    /* Note:
+     * The center parameter (2nd parameter) of the lookAt call is the sum of
+     * the position and the aim because the aim is defined to be relative to
+     * the position. */
+    glm::mat4 viewMat = glm::lookAt(_pos, _pos + _aim, _up);
     return viewMat;
 }
