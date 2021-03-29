@@ -13,6 +13,7 @@
 #include <glm/glm.hpp>
 #include <glm/ext.hpp>
 
+/* Camera. */
 class Cam {
    private:
     /* Position. */
