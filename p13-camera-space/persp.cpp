@@ -6,15 +6,6 @@
 
 #include "persp.hpp"
 
-glm::mat4 Persp::projMat() {
-    // clang-format off
-    glm::mat4 projMat = glm::perspective(
-        glm::radians(_fov), _aspect, _near, _far
-    );
-    // clang-format on
-    return projMat;
-}
-
 Persp::Persp(int width, int height, float near, float far, float fov) {
     _aspect = (float)width / (float)height;
     _near = near;
@@ -63,11 +54,20 @@ float Persp::fov(float fov) {
 }
 
 glm::mat4 Persp::proj() {
-    glm::mat4 projMat = this->projMat();
-
     // clang-format off
+    glm::mat4 result = glm::perspective(
+         glm::radians(_fov), _aspect, _near, _far
+    );
+    // clang-format on
+    return result;
+}
+
+glm::mat4 Persp::projView() {
+    glm::mat4 projMat = proj();
+
     // Create a view matrix that looks forward at +Z direction and looks upward
     // at +Y direction
+    // clang-format off
     glm::mat4 viewMat = glm::lookAt(
         glm::vec3(0.0f, 0.0f, 0.0f),
         glm::vec3(0.0f, 0.0f, 1.0f),
@@ -77,14 +77,4 @@ glm::mat4 Persp::proj() {
 
     // Apply the view on the perspective
     return projMat * viewMat;
-}
-
-glm::mat4 Persp::of(Trans &trans) {
-    glm::mat4 result = this->proj() * trans.world();
-    return result;
-}
-
-glm::mat4 Persp::of(Cam &cam, Trans &trans) {
-    glm::mat4 result = this->projMat() * cam.viewOf(trans);
-    return result;
 }

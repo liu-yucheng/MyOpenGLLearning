@@ -42,22 +42,22 @@ static void display() {
     static Trans trans;
     static Persp persp(winWidth, winHeight, 1.0f, 100.0f, 30.0f);
     static Cam cam;
-    static glm::mat4 worldVal(1.0f);
+    static Pipeline pipeline(&trans, &persp, &cam);
 
     transCount += 1;
-
     trans.rot(0.0f, rotateSpeed * transCount, 0.0f);
     trans.pos(0.0f, 0.0f, 3.0f);
-
     cam.pos(0.0f, 0.0f, -3.0f);
     cam.aim(0.0f, 0.0f, 2.0f);
     cam.up(0.0f, 1.0f, 0.0f);
 
-    worldVal = persp.of(cam, trans);
-
     glClear(GL_COLOR_BUFFER_BIT);
 
-    glUniformMatrix4fv(world, 1, GL_FALSE, glm::value_ptr(worldVal));
+    // clang-format off
+    glUniformMatrix4fv(
+        mapping, 1, GL_FALSE, glm::value_ptr(pipeline.mapping())
+    );
+    // clang-format on
 
     // Draw based on the vertices and indices
     glEnableVertexAttribArray(0);
@@ -163,10 +163,10 @@ static void loadShaderProgram() {
 
     glUseProgram(program);
 
-    // Bind shader variable "world"
-    world = glGetUniformLocation(program, "world");
-    if (world == 0xFFFFFFFF) {
-        errShowLine(funcName, "error: binding shader variable \"world\"");
+    // Bind shader variable "mapping"
+    mapping = glGetUniformLocation(program, "mapping");
+    if (mapping == 0xFFFFFFFF) {
+        errShowLine(funcName, "error: binding shader variable \"mapping\"");
         exit(1);
     }
 }

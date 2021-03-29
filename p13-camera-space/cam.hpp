@@ -5,7 +5,6 @@
  * 
  * Dependencies:
  * 1. GLM library (libglm-dev)
- * 2. The transformation custom library.
  */
 
 #ifndef CAM_HPP
@@ -13,8 +12,6 @@
 
 #include <glm/glm.hpp>
 #include <glm/ext.hpp>
-
-#include "trans.hpp"
 
 class Cam {
    private:
@@ -44,8 +41,6 @@ class Cam {
     glm::vec3 up(float x, float y, float z);
     /* Finds the camera view matrix. */
     glm::mat4 view();
-    /* Finds the view matrix of this camera on a specified object. */
-    glm::mat4 viewOf(Trans &trans);
 };
 
 // CAM_HPP

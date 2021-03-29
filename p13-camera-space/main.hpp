@@ -1,12 +1,11 @@
 /* File name: main.hpp
  * 
  * Intro:
- * C++ header of a program that shows a tetrahedron with various colors (red,
- * green, blue, black) rotating around the Y axis. The tetrahedron is shown
+ * C++ header of a program that shows a tetrahedron (same as that in part 12)
  * using camera space.
  * 
  * References:
- * 1. ogldev.org/www/tutorial13/tutorial13.html
+ * 1. ogldev.org/www/tutorial12/tutorial12.html
  * 2. glm.g-truc.net/0.9.9/api/modules.html
  */
 
@@ -28,6 +27,7 @@
 #include "trans.hpp"
 #include "persp.hpp"
 #include "cam.hpp"
+#include "pipeline.hpp"
 
 // Define variables
 static char const winTitle[] = "Camera Space";
@@ -39,7 +39,7 @@ static char const vsFileName[] = "./shader.vs";
 static std::string vsText;
 static char const fsFileName[] = "./shader.fs";
 static std::string fsText;
-static GLuint world;
+static GLuint mapping;
 
 // Define functions
 /* Loads the GLUT function callbacks. */

@@ -52,8 +52,3 @@ glm::mat4 Cam::view() {
     glm::mat4 viewMat = glm::lookAt(_pos, _aim, _up);
     return viewMat;
 }
-
-glm::mat4 Cam::viewOf(Trans &trans) {
-    glm::mat4 result = this->view() * trans.world();
-    return result;
-}
