@@ -64,11 +64,6 @@ glm::mat4 Cam::view() {
     return viewMat;
 }
 
-glm::mat4 Cam::viewOf(Trans &trans) {
-    glm::mat4 result = this->view() * trans.world();
-    return result;
-}
-
 bool Cam::onKey(int key) {
     bool result;
 
@@ -114,13 +109,13 @@ void Cam::onKeyDown() {
 }
 
 void Cam::onKeyLeft() {
-    glm::vec3 left = glm::cross(_aim, _up);
+    glm::vec3 left = glm::cross(_up, _aim);
     glm::vec3 unitLeft = glm::normalize(left);
     _pos += unitLeft * _step;
 }
 
 void Cam::onKeyRight() {
-    glm::vec3 right = glm::cross(_up, _aim);
+    glm::vec3 right = glm::cross(_aim, _up);
     glm::vec3 unitRight = glm::normalize(right);
     _pos += unitRight * _step;
 }

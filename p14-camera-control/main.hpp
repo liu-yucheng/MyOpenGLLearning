@@ -29,6 +29,7 @@
 #include "trans.hpp"
 #include "persp.hpp"
 #include "cam.hpp"
+#include "pipeline.hpp"
 
 // Define variables
 static char const winTitle[] = "Camera Control";
@@ -41,7 +42,7 @@ static char const vsFileName[] = "./shader.vs";
 static std::string vsText;
 static char const fsFileName[] = "./shader.fs";
 static std::string fsText;
-static GLuint world;
+static GLuint mapping;
 
 // Define functions
 /* Initializes the camera. */

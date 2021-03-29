@@ -6,7 +6,6 @@
  * Dependencies:
  * 1. GLUT library (freeglut3-dev)
  * 2. GLM library (libglm-dev)
- * 3. The transformation custom library.
  */
 
 #ifndef CAM_HPP
@@ -15,8 +14,6 @@
 #include <GL/freeglut.h>
 #include <glm/glm.hpp>
 #include <glm/ext.hpp>
-
-#include "trans.hpp"
 
 class Cam {
    private:
@@ -57,8 +54,6 @@ class Cam {
     glm::vec3 up(float x, float y, float z);
     /* Finds the camera view matrix. */
     glm::mat4 view();
-    /* Finds the view matrix of this camera on a specified object. */
-    glm::mat4 viewOf(Trans &trans);
     /* Changes the camera's state on keyboard input. */
     bool onKey(int key);
 };

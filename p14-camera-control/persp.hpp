@@ -5,8 +5,6 @@
  * 
  * Dependencies:
  * 1. GLM library (libglm-dev)
- * 2. The transformation custom library.
- * 3. The camera custom library.
  */
 
 #ifndef PERSP_HPP
@@ -14,9 +12,6 @@
 
 #include <glm/glm.hpp>
 #include <glm/ext.hpp>
-
-#include "trans.hpp"
-#include "cam.hpp"
 
 /* Perspective. */
 class Persp {
@@ -29,11 +24,6 @@ class Persp {
     float _far;
     /* Field of view (unit: degrees). */
     float _fov;
-    /* Finds the perspective projection matrix.
-     * Note:
-     * The projection matrix is looking forward at +Y direction and up at +Z
-     * direction. */
-    glm::mat4 projMat();
 
    public:
     /* Initializes the object with the specified parameters. */
@@ -55,14 +45,15 @@ class Persp {
     /* Reads and updates the field of view (unit: degrees). */
     float fov(float fov);
     /* Finds the perspective projection matrix.
-     * Note: 
-     * The projection matrix has a view that looks forward at +Z direction and
-     * looks upward at +Y direction. */
+     * Note:
+     * The matrix sees +Y as forward and -Z as upward.
+     */
     glm::mat4 proj();
-    /* Finds the matrix of this perspective of a specified transformation. */
-    glm::mat4 of(Trans &trans);
-    /* Finds the matrix of this perspective of a camera on a transformation. */
-    glm::mat4 of(Cam &cam, Trans &trans);
+    /* Finds the perspective projection view matrix.
+     * Note: 
+     * The matrix has a view that looks forward at +Z direction and looks
+     * upward at +Y direction. */
+    glm::mat4 projView();
 };
 
 // PERSP_HPP
