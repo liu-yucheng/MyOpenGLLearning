@@ -8,8 +8,7 @@
  * 
  * References:
  * 1. ogldev.org/www/tutorial14/tutorial14.html
- * 2. glm.g-truc.net/0.9.9/api/modules.html
- */
+ * 2. glm.g-truc.net/0.9.9/api/modules.html */
 
 // Include C++ libraries
 #include <iostream>
@@ -29,6 +28,7 @@
 #include "trans.hpp"
 #include "persp.hpp"
 #include "cam.hpp"
+#include "cam/ctrl.hpp"
 #include "pipeline.hpp"
 
 // Define variables

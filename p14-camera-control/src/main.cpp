@@ -1,8 +1,7 @@
 /* File name: main.cpp
  * 
  * Intro:
- * C++ implementation of the program defined in main.hpp.
- */
+ * C++ implementation of the program defined in main.hpp. */
 
 #include "main.hpp"
 
@@ -34,7 +33,7 @@ int main(int argc, char **argv) {
 }
 
 static void initCam() {
-    cam.controlled = true;
+    cam.ctrl().enabled(true);
 }
 
 static void loadGLUTFuncs() {
@@ -74,7 +73,7 @@ static void display() {
 }
 
 static void onKey(int key, int x, int y) {
-    cam.onKey(key);
+    cam.ctrl().onKey(key);
 }
 
 static void initGLEW() {

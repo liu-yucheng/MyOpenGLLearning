@@ -1,22 +1,23 @@
 /* File name: cam.cpp
  *
  * Intro:
- * C++ implementation of the camera custom library.
- */
+ * C++ implementation of the camera custom library. */
 
 #include "cam.hpp"
-
-/* Note:
- * For key reaction helper functions, see below the definition of the onKey
- * function. */
+#include "cam/ctrl.hpp"
 
 Cam::Cam() {
     _pos = glm::vec3(0.0f, 0.0f, 0.0f);
     _aim = glm::vec3(0.0f, 0.0f, 1.0f);
     _up = glm::vec3(0.0f, 1.0f, 0.0f);
-    _step = 1.0f;
+    _ctrl = nullptr;
+}
 
-    controlled = false;
+Cam::~Cam() {
+    // Delete the control
+    if (_ctrl != nullptr) {
+        delete _ctrl;
+    }
 }
 
 glm::vec3 Cam::pos() {
@@ -31,6 +32,12 @@ glm::vec3 Cam::pos(float x, float y, float z) {
     return old;
 }
 
+glm::vec3 Cam::pos(glm::vec3 newVal) {
+    glm::vec3 oldVal = _pos;
+    _pos = newVal;
+    return oldVal;
+}
+
 glm::vec3 Cam::aim() {
     return _aim;
 }
@@ -41,6 +48,12 @@ glm::vec3 Cam::aim(float x, float y, float z) {
     _aim[1] = y;
     _aim[2] = z;
     return old;
+}
+
+glm::vec3 Cam::aim(glm::vec3 newVal) {
+    glm::vec3 oldVal = _aim;
+    _aim = newVal;
+    return oldVal;
 }
 
 glm::vec3 Cam::up() {
@@ -55,6 +68,20 @@ glm::vec3 Cam::up(float x, float y, float z) {
     return old;
 }
 
+glm::vec3 Cam::up(glm::vec3 newVal) {
+    glm::vec3 oldVal = _up;
+    _up = newVal;
+    return oldVal;
+}
+
+camLib::Ctrl &Cam::ctrl() {
+    if (_ctrl == nullptr) {
+        _ctrl = new camLib::Ctrl();
+        _ctrl->subject(this);
+    }
+    return *_ctrl;
+}
+
 glm::mat4 Cam::view() {
     /* Note:
      * The center parameter (2nd parameter) of the lookAt call is the sum of
@@ -62,60 +89,4 @@ glm::mat4 Cam::view() {
      * the position. */
     glm::mat4 viewMat = glm::lookAt(_pos, _pos + _aim, _up);
     return viewMat;
-}
-
-bool Cam::onKey(int key) {
-    bool result;
-
-    if (!controlled) {
-        result = false;
-        return result;
-    }
-
-    switch (key) {
-        case GLUT_KEY_UP:
-            onKeyUp();
-            result = true;
-            break;
-        case GLUT_KEY_DOWN:
-            onKeyDown();
-            result = true;
-            break;
-        case GLUT_KEY_LEFT:
-            onKeyLeft();
-            result = true;
-            break;
-        case GLUT_KEY_RIGHT:
-            onKeyRight();
-            result = true;
-            break;
-        default:
-            result = false;
-            break;
-    }
-
-    return result;
-}
-
-// Implement the key reaction helper functions
-void Cam::onKeyUp() {
-    glm::vec3 unitAim = glm::normalize(_aim);
-    _pos += unitAim * _step;
-}
-
-void Cam::onKeyDown() {
-    glm::vec3 unitAim = glm::normalize(_aim);
-    _pos -= unitAim * _step;
-}
-
-void Cam::onKeyLeft() {
-    glm::vec3 left = glm::cross(_up, _aim);
-    glm::vec3 unitLeft = glm::normalize(left);
-    _pos += unitLeft * _step;
-}
-
-void Cam::onKeyRight() {
-    glm::vec3 right = glm::cross(_aim, _up);
-    glm::vec3 unitRight = glm::normalize(right);
-    _pos += unitRight * _step;
 }

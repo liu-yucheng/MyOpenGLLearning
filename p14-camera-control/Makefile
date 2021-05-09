@@ -32,14 +32,20 @@ CAM_O=$(OBJ_D)cam.o
 CAM_CPP=$(SRC_D)cam.cpp
 CAM_HPP=$(SRC_D)cam.hpp
 
+# cam/ctrl
+CAM__CTRL_O=$(OBJ_D)cam__ctrl.o
+CAM__CTRL_CPP=$(SRC_D)cam/ctrl.cpp
+CAM__CTRL_HPP=$(SRC_D)cam/ctrl.hpp
+
 # pipeline
 PIPELINE_O=$(OBJ_D)pipeline.o
 PIPELINE_CPP=$(SRC_D)pipeline.cpp
 PIPELINE_HPP=$(SRC_D)pipeline.hpp
 
-$(MAIN_X): $(DIRS) $(MAIN_O) $(TRANS_O) $(PERSP_O) $(CAM_O) $(PIPELINE_O)
+$(MAIN_X): $(DIRS) $(MAIN_O) $(TRANS_O) $(PERSP_O) $(CAM_O) $(CAM__CTRL_O) \
+$(PIPELINE_O)
 	g++ -o $(MAIN_X) \
-	    $(MAIN_O) $(TRANS_O) $(PERSP_O) $(CAM_O) $(PIPELINE_O) \
+	    $(MAIN_O) $(TRANS_O) $(PERSP_O) $(CAM_O) $(CAM__CTRL_O) $(PIPELINE_O) \
 	    $(LDLIBS)
 
 $(MAIN_O): $(MAIN_CPP) $(MAIN_HPP)
@@ -53,6 +59,9 @@ $(PERSP_O): $(PERSP_CPP) $(PERSP_HPP)
 
 $(CAM_O): $(CAM_CPP) $(CAM_HPP)
 	g++ -c $(CAM_CPP) -o $(CAM_O)
+
+$(CAM__CTRL_O): $(CAM__CTRL_CPP) $(CAM__CTRL_HPP)
+	g++ -c $(CAM__CTRL_CPP) -o $(CAM__CTRL_O)
 
 $(PIPELINE_O): $(PIPELINE_CPP) $(PIPELINE_HPP)
 	g++ -c $(PIPELINE_CPP) -o $(PIPELINE_O)
