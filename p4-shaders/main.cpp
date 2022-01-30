@@ -25,6 +25,9 @@
  * C++ raw string is a language feature that is supported in C++ 11 and above.
  */
 
+/* Copyright 2022 Yucheng Liu. GNU GPL3 license.
+ * GNU GPL3 license copy: https://www.gnu.org/licenses/gpl-3.0.txt */
+
 // Include C libraries
 #include <cstdio>
 #include <cstring>
