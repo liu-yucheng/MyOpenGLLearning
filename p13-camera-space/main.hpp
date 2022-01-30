@@ -9,6 +9,9 @@
  * 2. glm.g-truc.net/0.9.9/api/modules.html
  */
 
+/* Copyright 2022 Yucheng Liu. GNU GPL3 license.
+ * GNU GPL3 license copy: https://www.gnu.org/licenses/gpl-3.0.txt */
+
 // Include C++ libraries
 #include <iostream>
 #include <fstream>
