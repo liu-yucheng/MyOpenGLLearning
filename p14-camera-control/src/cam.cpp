@@ -3,6 +3,9 @@
  * Intro:
  * C++ implementation of the camera custom library. */
 
+/* Copyright 2022 Yucheng Liu. GNU GPL3 license.
+ * GNU GPL3 license copy: https://www.gnu.org/licenses/gpl-3.0.txt */
+
 #include "cam.hpp"
 #include "cam/ctrl.hpp"
 
