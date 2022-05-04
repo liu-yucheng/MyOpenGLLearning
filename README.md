@@ -11,8 +11,10 @@ Code I have written or reviewed while I am learning OpenGL and Computer Graphics
 
 ## References
 
-1. http://ogldev.org/
-2. http://glm.g-truc.net/0.9.9/
+**Note:** References are in the IEEE style. The IEEE style guide is available at https://ieeeauthorcenter.ieee.org/wp-content/uploads/IEEE-Reference-Guide.pdf.
+
+**[1]** "OpenGL Step by Step." ogldev.com. http://ogldev.org/ (accessed May 5, 2022).
+**[2]** "OpenGL Mathematics." g-truc.net. http://glm.g-truc.net/0.9.9/ (accessed May 5, 2022).
 
 # Miscellaneous
 ## Versioning
